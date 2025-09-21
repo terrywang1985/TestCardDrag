@@ -1,0 +1,94 @@
+# Unity 2D卡牌系统预制体创建指南
+
+## 1. 创建游戏画布
+
+1. 在Hierarchy面板中右键点击空白处
+2. 选择 UI > Canvas
+3. 将Canvas命名为"GameCanvas"
+4. 点击Canvas，在Inspector面板中设置：
+   - Render Mode: Screen Space - Overlay
+   - UI Scale Mode: Scale With Screen Size
+   - Reference Resolution: 1080 x 1920 (或其他适合竖屏的分辨率)
+   - Screen Match Mode: Match Width or Height
+   - Match: 0.5 (或根据需要调整)
+
+## 2. 创建手牌区域
+
+1. 在Hierarchy面板中，右键点击GameCanvas
+2. 选择 UI > Panel
+3. 将Panel命名为"HandArea"
+4. 在Inspector面板中设置：
+   - Rect Transform: 位置、旋转(0,0,0)、缩放(1,1,1)
+   - 宽度: 与Canvas相同
+   - 高度: 约Canvas高度的1/4
+   - 锚点: 底部居中
+   - 背景颜色: 半透明黑色或其他适合的颜色
+
+## 3. 创建桌面区域
+
+1. 在Hierarchy面板中，右键点击GameCanvas
+2. 选择 UI > Panel
+3. 将Panel命名为"TableArea"
+4. 在Inspector面板中设置：
+   - Rect Transform: 位置、旋转(0,0,0)、缩放(1,1,1)
+   - 宽度: 与Canvas相同
+   - 高度: 约Canvas高度的1/2
+   - 锚点: 居中
+   - 背景颜色: 半透明绿色或其他适合的颜色
+
+## 4. 创建卡牌预制体
+
+1. 在Project面板中，右键点击Assets文件夹
+2. 选择 Create > UI > Image
+3. 将Image命名为"CardPrefab"
+4. 在Inspector面板中设置：
+   - Rect Transform: 宽度约100，高度约150（根据屏幕分辨率调整）
+   - 源图像: 可以暂时使用Unity自带的白色纹理
+
+5. 为卡牌添加子元素：
+   - 卡牌背景: 添加一个Image组件作为背景
+   - 卡牌图片: 添加一个Image组件用于显示卡牌图像
+   - 卡牌名称: 添加一个Text组件显示卡牌名称
+   - 卡牌描述: 添加一个Text组件显示卡牌描述
+   - 费用文本: 添加一个Text组件显示费用
+   - 攻击力文本: 添加一个Text组件显示攻击力
+   - 生命值文本: 添加一个Text组件显示生命值
+
+6. 为卡牌添加必要的组件：
+   - 添加 Canvas Group 组件
+   - 添加 CardVisual 脚本组件
+   - 添加 CardDragHandler 脚本组件
+
+7. 将CardPrefab拖到Project面板中的Prefabs文件夹，创建预制体
+
+## 5. 设置场景管理器
+
+1. 在Hierarchy面板中，右键点击空白处
+2. 选择 Create Empty
+3. 将GameObject命名为"GameManager"
+4. 添加GameManager脚本组件
+5. 在Inspector面板中，将GameCanvas、HandArea、TableArea拖拽到相应的字段中
+
+## 6. 设置卡牌管理器
+
+1. 在Hierarchy面板中，右键点击GameManager
+2. 选择 Create Empty Child
+3. 将GameObject命名为"CardManager"
+4. 添加CardManager脚本组件
+5. 添加TestCardGenerator脚本组件
+6. 在Inspector面板中，将CardPrefab、HandArea、TableArea拖拽到相应的字段中
+7. 在GameManager的Inspector面板中，将CardManager拖拽到cardManager字段中
+
+## 7. 测试游戏
+
+1. 点击Unity编辑器顶部的Play按钮
+2. 检查是否生成了手牌
+3. 尝试拖拽卡牌到手牌区域和桌面区域
+4. 验证拖拽功能是否正常工作
+
+## 注意事项
+
+- 实际项目中，应该为卡牌添加真实的图片资源
+- 可以根据需要调整卡牌的大小、布局和样式
+- 可以扩展脚本以添加更多功能，如卡牌效果、动画等
+- 确保设置正确的竖屏分辨率和UI缩放模式
